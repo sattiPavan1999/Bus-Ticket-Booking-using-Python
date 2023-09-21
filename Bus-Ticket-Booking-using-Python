@@ -1,0 +1,47 @@
+# Initialize available seats
+total_seats = 10
+available_seats = list(range(1, total_seats + 1))
+
+# Initialize booking information
+bookings = {}
+
+def display_available_seats():
+    print(f"Available Seats: {available_seats}")
+
+def book_ticket(name, num_tickets):
+    global available_seats
+    if num_tickets > len(available_seats):
+        print("Sorry, there are not enough available seats.")
+        return
+    
+    booked_seats = available_seats[:num_tickets]
+    available_seats = available_seats[num_tickets:]
+    bookings[name] = booked_seats
+    print(f"Booking successful! Your seat(s) are: {booked_seats}")
+
+def display_booking_summary():
+    print("Booking Summary:")
+    for name, seats in bookings.items():
+        print(f"{name}: {seats}")
+
+# Main program loop
+while True:
+    print("\n1. Display available seats")
+    print("2. Book a ticket")
+    print("3. Display booking summary")
+    print("4. Exit")
+    
+    choice = input("Enter your choice: ")
+
+    if choice == '1':
+        display_available_seats()
+    elif choice == '2':
+        name = input("Enter your name: ")
+        num_tickets = int(input("Enter the number of tickets to book: "))
+        book_ticket(name, num_tickets)
+    elif choice == '3':
+        display_booking_summary()
+    elif choice == '4':
+        break
+    else:
+        print("Invalid choice. Please try again.")
